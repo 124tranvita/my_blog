@@ -24,7 +24,8 @@ Project is created with:
 * Register
 * Login
 * Manage Account (Update user information include username/profile picture/password/description)
-* List user all posts
+* View user's post in single post
+* View user's post in list
 ### Post:
 * Create new post
 * Update post
