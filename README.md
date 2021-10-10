@@ -23,7 +23,7 @@ Project is created with:
 ### User:
 * Register
 * Login
-* Manage Account (Update user's include user's name/profile picture/password/description)
+* Manage Account (Update user information include username/profile picture/password/description)
 * List user all posts
 ### Post:
 * Create new post
