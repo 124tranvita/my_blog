@@ -52,6 +52,7 @@ def view_post(post_id):
 
 # Update post view
 @posts_blueprint.route('/<int:post_id>/update', methods=['GET', 'POST'])
+@login_required
 def update_post(post_id):
 
     post = Post.query.get_or_404(post_id)
@@ -79,6 +80,7 @@ def update_post(post_id):
 
 # Delete post view
 @posts_blueprint.route('/<int:post_id>/delete')
+@login_required
 def delete_post(post_id):
 
     post = Post.query.get_or_404(post_id)
