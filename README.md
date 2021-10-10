@@ -36,7 +36,7 @@ Project is created with:
 * Delete comment
 
 ## To Do
-* Add ability to support login via Google, FB, Github,... using Flask-Dance and Flask-OAuth to 
+* Add ability to support user login via Google, FB, Github,... using Flask-Dance and Flask-OAuth
 * Add ability to create a post with image
 * Improve UI by adding some JS and more CSS
 * ...
