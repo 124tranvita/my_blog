@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}
+Login
+{% endblock title %}
+
+{% block content %}
+<div class="container"> 
+    <div class="bg-light p-3 rounded">
+        <h2>Login</h2>
+        <p>Don't have account yet? <a href="{{ url_for('users.register') }}">Register</a>.</p>
+    </div>
+    <div class="col-sm-6" style="margin: 35px" align="left">
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.email.label(class="form-label") }}
+                {{ form.email(class="form-control") }}
+                {{ render_error(form.email) }}
+            </div>
+            <div class="mb-3">
+                {{ form.password.label(class="form-label") }}
+                {{ form.password(class="form-control") }}
+                {{ render_error(form.password) }}
+            </div>
+            <div class="col-12">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}

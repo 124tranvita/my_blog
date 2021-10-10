@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block title %}
+Home
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <!--main page-->
+    <div class="bg-light p-5 rounded">
+        <h1 class="display-4">Our Blog Page</h1>
+        <p class="lead">Yesterday once more~!</p>
+        <hr class="my-4">
+    </div>
+    <!--List all post to index-->
+    <div class="container">
+    {% for post in posts.items %}
+        <div class="card" style="width: 100%; margin-top: 15px">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    Author: <a href="{{ url_for('users.user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
+                </h6>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    Published Date: {{ post.date.strftime('%Y-%m-%d') }}
+                </h6>
+                <p class="card-text">{{ post.content[:100] }} ...</p>
+                <a href="{{ url_for('posts.view_post', post_id=post.id) }}" class="card-link">Read more</a>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    <!--pagination-->
+    <div class="container" style="margin-top: 35px; margin-bottom: 35px">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('core.index', page=posts.prev_num) }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+                    {% if page_num %}
+                        {% if posts.page == page_num %}
+                            <li class="page-item disabled">
+                                <a class="page-link" href="{{ url_for('core.index', page=page_num) }}">{{ page_num }}</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('core.index', page=page_num) }}">{{ page_num }}</a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('core.index', page=posts.next_num) }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <!--Pagination end-->
+</div>
+{% endblock content %}
+
+<div class="container">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+                Author: <a href="{{ url_for('users.user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
+            </h6>
+            <h6 class="card-subtitle mb-2 text-muted">
+                Published Date: {{ post.date.strftime('%Y-%m-%d') }}
+            </h6>
+            <p class="card-text">{{ post.content }}</p>
+            <a href="{{ url_for('posts.view_post', post_id=post.id) }}" class="card-link">Read more</a>
+        </div>
+    </div>
+</div>

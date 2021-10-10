@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}
+{% if update %}
+Update Post
+{% else %}
+Create Post
+{% endif %}
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="bg-light p-3 rounded">
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.title.label(class="form-label") }}
+                {{ form.title(class="form-control") }}
+            </div>
+            <div class="mb-3">
+                {{ form.content.label(class="form-label") }}
+                {{ form.content(class="form-control",rows="10") }}
+            </div>
+            <div class="mb-3">
+                {% if update %}
+                    {{ form.submit(class="btn btn-primary", value="Update") }}
+                    <a class="btn btn-secondary" href="{{ url_for('posts.view_post', post_id=post.id) }}">Cancel</a>
+                {% else %}
+                    {{ form.submit(class="btn btn-primary") }}
+                    <a class="btn btn-secondary" href="{{ url_for('core.index') }}">Cancel</a>
+                {% endif %}       
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
+
+
+
+
+
+

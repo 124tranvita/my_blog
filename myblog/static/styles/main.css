@@ -1,0 +1,39 @@
+.circle {
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+.topnav-right {
+    float: right;
+    }
+
+#margin-top-bottom {
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+
+#margin-top {
+    margin-top: 15px;
+}
+
+#pre-post-content {
+    display: block;
+    font-family: sans-serif;
+    margin: 1em 0;
+    font-weight: 300;
+    font-size: 1rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    text-align: justify;
+  } 
+  
+/* Show it is fixed to the top */
+body {
+    min-height: 75rem;
+    padding-top: 4.5rem;
+  }

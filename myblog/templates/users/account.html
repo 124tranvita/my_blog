@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}
+Account: {{ current_user.username }}
+{% endblock title %}
+
+{% block content %}
+<div class="container" align="center">
+    <div class="bg-light p-3 rounded">
+        <div class="circle">
+            <img src="{{ profile_image_path }}" alt="">
+        </div>
+        <h1 class="display-4">{{ current_user.username }}</h1>
+        <p class="lead"><i>Is that you?</i></p>
+    </div>
+    <div class="col-md-8" align="left" id="margin-top">
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Email</label>
+            <input class="form-control" type="text" placeholder="{{ current_user.email }}" readonly>
+        </div>
+        <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.username.label(class="form-label") }}
+                {{ form.username(class="form-control") }}
+                {{ render_error(form.username) }}
+            </div>
+            <div class="mb-3">
+                {{ form.profile_image.label(class="form-label") }}
+                {{ form.profile_image(class="form-control") }}
+                {{ render_error(form.profile_image) }}
+            </div>
+            <div class="mb-3">
+                {{ form.description.label(class="form-label") }}
+                {{ form.description(class="form-control") }}
+                {{ render_error(form.description) }}
+            </div>
+            <div class="col-12">
+                {{ form.submit(class="btn btn-primary") }}
+                <a class="btn btn-primary" href="{{ url_for('users.change_password', username=current_user.username) }}">Change password</a>
+                <a class="btn btn-secondary" href="{{ url_for('users.account') }}">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
+

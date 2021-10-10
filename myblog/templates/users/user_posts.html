@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ user.username }}'s posts
+{% endblock title %}
+
+{% block content %}
+<!--user infor-->
+    <div class="container" align="center">
+        <div class="bg-light p-3 rounded">
+            <div class="circle">
+                <img src="{{ profile_image_path }}" alt="">
+            </div>
+            <h1 class="display-4">{{ user.username }}</h1>
+            <p class="lead"><i>...{{ user.description }}...</i></p>
+        </div>
+    </div>
+ <!--List all user post-->
+    <div class="container">
+    {% for post in posts.items %}
+        <div class="card" style="width: 100%; margin-top: 15px">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    Author: <a href="{{ url_for('users.user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
+                </h6>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    Published Date: {{ post.date.strftime('%Y-%m-%d') }}
+                </h6>
+                <p class="card-text">{{ post.content[:100] }} ...</p>
+                <a href="{{ url_for('posts.view_post', post_id=post.id) }}" class="card-link">Read more</a>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+<!--Pagination-->
+    <div class="container" style="margin-top: 35px; margin-bottom: 35px">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('users.user_posts', username=user.username, page=posts.prev_num) }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+                    {% if page_num %}
+                        {% if posts.page == page_num %}
+                            <li class="page-item disabled">
+                                <a class="page-link" href="{{ url_for('users.user_posts', username=user.username, page=page_num) }}">{{ page_num }}</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('users.user_posts', username=user.username, page=page_num) }}">{{ page_num }}</a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('users.user_posts', username=user.username, page=posts.next_num) }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+{% endblock content %}
+
